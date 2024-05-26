@@ -10,6 +10,30 @@
 /*--------------------------------------------------------------
 # Blog
 --------------------------------------------------------------*/
+
+
+h1, h2 {
+    text-align: left;
+}
+p {
+    margin-bottom: 20px;
+    text-align: left;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+li {
+    margin-bottom: 10px;
+}
+.highlight {
+    font-weight: bold;
+}
+
+
+
+
 /* Estilo para los titulares de las noticias */
 .post-title {
   color: black; /* Color del texto */
