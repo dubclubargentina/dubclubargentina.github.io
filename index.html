@@ -12,7 +12,7 @@
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/favicon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -101,55 +101,7 @@
   </div>
 </section><!-- End Hero -->
 
-<script>
-  // Función para abrir la ventana emergente
-  function openPopup(url) {
-    // Dimensiones de la ventana emergente
-    var width = 600;
-    var height = 400;
-    // Calculamos la posición central de la pantalla
-    var left = (screen.width - width) / 2;
-    var top = (screen.height - height) / 2;
-    // Abrimos la ventana emergente con las dimensiones y posición calculadas
-    window.open(url, 'Popup', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
-  }
 
-  // Obtenemos el enlace a la radio
-  var radioLink = document.getElementById('radio-link');
-  // Agregamos un evento clic al enlace
-  radioLink.addEventListener('click', function(event) {
-    // Prevenimos el comportamiento por defecto del enlace
-    event.preventDefault();
-    // Abrimos la ventana emergente con el enlace al audio de la radio
-    openPopup('https://open.spotify.com/playlist/34cliDYyVcrKlycNqZhjDq?si=vh-lAqS9Qz6-nM7Db23-bQ');
-  });
-</script>
-
-<style>
-  /* Estilos para el popup */
-  .popup {
-    width: 600px;
-    height: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-image: url('ruta/a/la/imagen.jpg'); /* Ruta a tu imagen de fondo */
-    background-size: cover;
-    padding: 20px;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
-  }
-
-  /* Estilos para el botón de cerrar */
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    color: #fff;
-    font-size: 20px;
-  }
-</style>
 
 
 
@@ -1103,6 +1055,56 @@ Nuestro equipo de diseñadores se asegura de que la estética visual de tu músi
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    // Función para abrir la ventana emergente
+    function openPopup(url) {
+      // Dimensiones de la ventana emergente
+      var width = 600;
+      var height = 400;
+      // Calculamos la posición central de la pantalla
+      var left = (screen.width - width) / 2;
+      var top = (screen.height - height) / 2;
+      // Abrimos la ventana emergente con las dimensiones y posición calculadas
+      window.open(url, 'Popup', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
+    }
+  
+    // Obtenemos el enlace a la radio
+    var radioLink = document.getElementById('radio-link');
+    // Agregamos un evento clic al enlace
+    radioLink.addEventListener('click', function(event) {
+      // Prevenimos el comportamiento por defecto del enlace
+      event.preventDefault();
+      // Abrimos la ventana emergente con el enlace al audio de la radio
+      openPopup('https://open.spotify.com/playlist/34cliDYyVcrKlycNqZhjDq?si=vh-lAqS9Qz6-nM7Db23-bQ');
+    });
+  </script>
+  
+  <style>
+    /* Estilos para el popup */
+    .popup {
+      width: 600px;
+      height: 400px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-image: url('ruta/a/la/imagen.jpg'); /* Ruta a tu imagen de fondo */
+      background-size: cover;
+      padding: 20px;
+      box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+    }
+  
+    /* Estilos para el botón de cerrar */
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 20px;
+    }
+  </style>
 
 </body>
 
