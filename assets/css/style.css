@@ -1716,6 +1716,47 @@ section {
   border: 2px solid #cc1616;
 }
 
+
+
+/*--------------------------------------------------------------
+# Cta
+--------------------------------------------------------------*/
+.bloque2 {
+  background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.5)), url("../img/blog/dub-club-argetina-rastafarai-day-2024.jpg") fixed center center;
+  background-size: cover;
+  padding: 150px 0;
+}
+
+.bloque2 h3 {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.bloque2 p {
+  color: #fff;
+}
+
+.bloque2 .cta-btn {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 28px;
+  transition: 0.5s;
+  margin-top: 10px;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.bloque2 .cta-btn:hover {
+  background: #cc1616;
+  border: 2px solid #cc1616;
+}
+
+
 /*--------------------------------------------------------------
 # Portfolio
 --------------------------------------------------------------*/
