@@ -164,7 +164,7 @@
     </div>
 
     <!-- Noticias -->
-     <br>
+    <br>
     <div class="container my-5">
         <div class="row" id="newsContainer">
             <!-- Aquí se cargarán las noticias dinámicamente -->
@@ -197,54 +197,48 @@
                 </a>
                 <!-- WhatsApp -->
                 <a href="https://wa.me/5493413209744" target="_blank" style="margin: 0 10px; text-decoration: none;">
-                    <button style="background-color: #25D366; border: none; color: #fff; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                        WhatsApp
-                    </button>
+                    <button style="background-color: #25D366; border: none; color: #fff; padding: 10px 20px; border-radius: 5px;">Contáctanos</button>
                 </a>
-            </div>
-            <div style="border-top: 1px solid #fff; margin-top: 10px; padding-top: 10px;">
-                <p>&copy; 2024 Dub Club Argentina. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-        // Cargar noticias desde localStorage
-        const newsData = JSON.parse(localStorage.getItem('newsData')) || [];
-        const newsContainer = document.getElementById('newsContainer');
-        const featuredNews = document.getElementById('featuredNews');
-        const featuredButton = document.getElementById('featuredButton');
+        // Función para cargar noticias desde el localStorage
+        window.onload = function() {
+            const noticias = JSON.parse(localStorage.getItem('newsData')) || [];
+            const newsContainer = document.getElementById('newsContainer');
+            const featuredNews = document.getElementById('featuredNews');
+            const featuredButton = document.getElementById('featuredButton');
 
-        // Verificar en la consola que las noticias están cargadas correctamente
-        console.log(newsData);
-
-        if (newsData.length === 0) {
-            featuredNews.innerHTML = `<h1>No hay noticias publicadas aún</h1>`;
-            newsContainer.innerHTML = `<p>No hay noticias disponibles.</p>`;
-        } else {
-            // Mostrar la noticia destacada
-            const featured = newsData.find(news => news.isFeatured);
+            // Mostrar noticia destacada
+            const featured = noticias.find(n => n.isFeatured);
             if (featured) {
                 featuredNews.style.backgroundImage = `url('${featured.featuredImage}')`;
-                featuredNews.querySelector('h1').textContent = featured.title;
-                featuredButton.onclick = () => (window.location.href = `noticia.html?id=${featured.id}`);
+                featuredButton.onclick = function() {
+                    window.location.href = `noticia.html?id=${featured.id}`;
+                };
             }
 
-            // Renderizar las noticias
-            newsContainer.innerHTML = newsData.map(news => 
-                `<div class="col-md-3 col-sm-6 mb-4">
+            // Mostrar noticias en el contenedor
+            noticias.forEach(noticia => {
+                const card = document.createElement('div');
+                card.classList.add('col-md-4');
+                card.innerHTML = `
                     <div class="card news-card">
-                        <img src="${news.featuredImage}" class="card-img-top" alt="${news.title}">
+                        <img src="${noticia.featuredImage}" class="card-img-top" alt="${noticia.title}">
                         <div class="card-body">
-                            <h5 class="card-title">${news.title}</h5>
-                            <button class="btn btn-primary" onclick="window.location.href='noticia.html?id=${news.id}'">Leer más</button>
+                            <h5 class="card-title">${noticia.title}</h5>
+                            <a href="noticia.html?id=${noticia.id}" class="btn btn-primary">Leer más</a>
                         </div>
                     </div>
-                </div>`).join('');
-        }
+                `;
+                newsContainer.appendChild(card);
+            });
+        };
     </script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
