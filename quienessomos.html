@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lanzamientos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://dubclubargentina.com.ar/assets/img/dubclubargentinalogo.jpg" type="image/x-icon">
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header con fondo animado */
+    .header-container {
+      background: linear-gradient(45deg, #ff0000, #ffcc00, #008000);
+      background-size: 400% 400%;
+      animation: gradient-animation 5s ease infinite;
+      padding: 80px 0;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes gradient-animation {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .header-container h2 {
+      font-size: 3.5rem;
+      margin: 10px 0;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .header-container p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      font-weight: lighter;
+    }
+
+    .container {
+      margin-top: 60px;
+    }
+
+    /* Mejorando la sección de información */
+    .info-box {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .info-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .info-box h4 {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .info-box p {
+      font-size: 1.1rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Sección de galería */
+    .gallery-container {
+      padding: 50px 0;
+      background-color: #fff;
+    }
+
+    .gallery-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    .gallery-item {
+      margin-bottom: 15px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      color: #fff;
+      padding: 40px 20px;
+      position: relative;
+      text-align: center;
+      background-image: linear-gradient(45deg, #ff0000, #ffcc00, #008000);
+      background-size: 400% 400%;
+      animation: gradient-animation 5s ease infinite;
+    }
+
+    footer h5,
+    footer p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    footer .social-links a {
+      margin: 0 15px;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    footer .social-links a:hover {
+      color: #ffcc00;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="https://dubclubargentina.com.ar/assets/img/dubclubargentinalogo.jpg" alt="Logo DubClubArgentina" width="40" height="auto">
+        Dub Club Argentina
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="lanzamientos.html">Lanzamientos</a></li>
+          <li class="nav-item"><a class="nav-link" href="rosaionrecords.html">Sello Discográfico</a></li>
+          <li class="nav-item"><a class="nav-link" href="quienessomos.html">Quienes Somos</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-success text-white" href="https://wa.me/5493413209744">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="header-container">
+    <div class="container">
+      <div class="section-title text-center">
+        <h2>QUIENES SOMOS</h2>
+        <p>ACÁ TE CONTAMOS UN POCO DE NUESTRA HISTORIA Y EVENTOS</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Información -->
+  <section id="info" class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="info-box">
+          <h4>Fundación y Expansión</h4>
+          <p>Fundado por Iggy Dob, selector, dj y productor de música Dub, el Dub Club se ha expandido para incluir: Dub Club Argentina, Dub Club Puerto Escondido en México y Dub Club Rosario en Argentina.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="info-box">
+          <h4>Sobre los Eventos</h4>
+          <p>El Dub Club es conocido por sus eventos vibrantes y energéticos, enfocados en el Dub, Stepper y Roots, tanto con sistemas de sonido como sin ellos, según el evento y el lugar.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="info-box">
+          <h4>Presencia Internacional</h4>
+          <p>Con su sede en Argentina y expansión en México, Dub Club lleva su pasión por la música Dub a un público global, organizando eventos tanto nacionales como internacionales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section id="galeria" class="gallery-container">
+    <h2>Galería de Flyers y Posters</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-srverdeiggydob01.jpg" alt="Imagen 1">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-all-stars-iggydob02.jpg" alt="Imagen 2">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-lesspol-iggydob01.jpg" alt="Imagen 3">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-dublive-iggydob01.jpg" alt="Imagen 1">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-micronomade-iggydob01.jpg" alt="Imagen 2">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-dubeleva-iggydob01.jpg" alt="Imagen 3">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-mosthsiggydob03.jpg" alt="Imagen 1">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-panchiselecta-iggydob01.jpg" alt="Imagen 2">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-richiebones-iggydob01.jpg" alt="Imagen 3">
+        </div>
+
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-mosthsiggydob02.jpg" alt="Imagen 1">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-mosthsiggydob03.jpg" alt="Imagen 2">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-richiebones-iggydob02.jpg" alt="Imagen 3">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-selectormati-iggydob01.jpg" alt="Imagen 1">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-mosthighsound-iggydob01.jpg" alt="Imagen 2">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-rovere-iggydob01.jpg" alt="Imagen 3">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-litoral-sound-system-iggydob02.jpg" alt="Imagen 1">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclubargentina-flyer-senorverde-iggydob01.jpg" alt="Imagen 2">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclub-puerto-escondido-lenguarlert-iggydob01.jpg" alt="Imagen 3">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclub-puerto-escondido-nicoroyale-iggy-dob.jpg" alt="Imagen 3">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclub-puerto-escondido-iggy-dob.jpg" alt="Imagen 3">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclub-puerto-escondido-sonido-p%C3%A1ntano-iggy-dob.jpg" alt="Imagen 3">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclub-puerto-escondido-don-camilo-iggydob01.jpg" alt="Imagen 3">
+        </div>
+        <div class="col-md-4 col-sm-6 gallery-item">
+          <img src="https://dubclubargentina.com.ar/assets/img/blog/dubclubargentina/dubclub-puerto-escondido-iggy-dob02.jpg" alt="Imagen 3">
+        </div>
+        <!-- Añadir más imágenes aquí -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <h5>Dub Club Argentina</h5>
+      <p>Argentina, Buenos Aires</p>
+      <p>Email: <a href="mailto:dubclubargentina@gmail.com">dubclubargentina@gmail.com</a></p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/dubclubargentina/" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="30">
+        </a>
+        <a href="https://www.facebook.com/dubclubargentina" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="30">
+        </a>
+        <a href="https://wa.me/5493413209744" target="_blank">
+          <button style="background-color: #25D366; color: white; padding: 10px 20px; border-radius: 5px;">WhatsApp</button>
+        </a>
+      </div>
+      <div style="border-top: 1px solid #ff0000; margin-top: 15px; padding-top: 10px; font-size: 0.9rem;">
+        © Copyright Dub Club Argentina. Todos los derechos reservados | Diseño y Programación por <a href="https://www.instagram.com/lamarea_dg/" target="_blank">MAREA</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+
+</html>
