@@ -8,27 +8,44 @@
     <script src="https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
     <style>
         .card-img-top {
+            display: block;
+            margin: 0 auto;
             max-height: 200px;
             object-fit: cover;
         }
+
+        .card-text {
+            text-align: justify;
+            padding: 10px;
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
         .card {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
+            overflow: hidden;
         }
+
         .container h2 {
             text-align: center;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="index.html">DubClubArgentina</a>
         </div>
     </nav>
 
+    <!-- Formulario -->
     <div class="container my-5">
-        <h2>Publicar una nueva noticia</h2>
+        <h2 id="formTitle">Publicar una nueva noticia</h2>
         <form id="newsForm">
             <div class="mb-3">
                 <label for="title" class="form-label">Título de la noticia</label>
@@ -36,76 +53,138 @@
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label">Contenido</label>
-                <textarea class="form-control" id="content"></textarea>
+                <textarea class="form-control" id="content" rows="5"></textarea>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Imagen destacada (URL)</label>
                 <input type="url" class="form-control" id="image" required>
             </div>
-            <button type="submit" class="btn btn-primary">Publicar</button>
+            <div class="mb-3">
+                <label for="isFeatured" class="form-label">Marcar como noticia destacada</label>
+                <input type="checkbox" class="form-check-input" id="isFeatured">
+            </div>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Publicar Noticia</button>
         </form>
     </div>
 
+    <!-- Lista de noticias -->
     <div class="container my-5">
         <h2>Noticias Publicadas</h2>
-        <div id="newsList" class="row"></div>
+        <div id="newsList" class="row">
+            <!-- Aquí se renderizarán las noticias -->
+        </div>
     </div>
 
     <script>
         let editor;
-        ClassicEditor.create(document.querySelector('#content'))
-            .then(newEditor => editor = newEditor)
+
+        // Inicializar CKEditor
+        ClassicEditor
+            .create(document.querySelector('#content'))
+            .then(newEditor => {
+                editor = newEditor;
+            })
             .catch(error => console.error(error));
 
-        const storageKey = 'newsData';
+        const newsData = JSON.parse(localStorage.getItem('newsData')) || [];
+        const newsList = document.getElementById('newsList');
 
-        function getNews() {
-            return JSON.parse(localStorage.getItem(storageKey)) || [];
-        }
-
-        function saveNews(news) {
-            localStorage.setItem(storageKey, JSON.stringify(news));
-        }
-
+        // Renderizar noticias
         function renderNews() {
-            const newsList = document.getElementById('newsList');
-            const news = getNews();
-            newsList.innerHTML = news.length
-                ? news.map(n => `
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="${n.image}" class="card-img-top" alt="${n.title}">
-                            <div class="card-body">
-                                <h5>${n.title}</h5>
-                                <p>${n.content.slice(0, 100)}...</p>
-                                <button class="btn btn-danger btn-sm" onclick="deleteNews(${n.id})">Eliminar</button>
-                            </div>
+            if (newsData.length === 0) {
+                newsList.innerHTML = `<p>No hay noticias publicadas.</p>`;
+                return;
+            }
+
+            newsList.innerHTML = newsData.map(news => `
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="${news.featuredImage}" class="card-img-top" alt="${news.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${news.title}</h5>
+                            <div class="card-text">${news.content}</div>
+                            <button class="btn btn-warning btn-sm" onclick="editNews(${news.id})">Editar</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteNews(${news.id})">Eliminar</button>
                         </div>
                     </div>
-                `).join('')
-                : '<p>No hay noticias publicadas.</p>';
+                </div>
+            `).join('');
         }
 
-        function deleteNews(id) {
-            const news = getNews().filter(n => n.id !== id);
-            saveNews(news);
-            renderNews();
-        }
-
+        // Publicar nueva noticia
         document.getElementById('newsForm').onsubmit = function (e) {
             e.preventDefault();
+
             const title = document.getElementById('title').value.trim();
-            const content = editor.getData().trim();
+            const content = editor.getData().trim(); // Obtener contenido del editor
             const image = document.getElementById('image').value.trim();
+            const isFeatured = document.getElementById('isFeatured').checked;
 
-            if (!title || !content || !image) return alert('Completa todos los campos.');
+            if (!title || !content || !image) {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
 
-            const news = getNews();
-            news.push({ id: Date.now(), title, content, image });
-            saveNews(news);
-            renderNews();
+            const newNews = {
+                id: newsData.length ? newsData[0].id + 1 : 1,
+                title,
+                content,
+                featuredImage: image,
+                isFeatured
+            };
+
+            newsData.unshift(newNews); // Agregar noticia al inicio
+            localStorage.setItem('newsData', JSON.stringify(newsData));
+
+            renderNews(); // Actualizar la lista
+            document.getElementById('newsForm').reset();
+            editor.setData(''); // Limpiar editor
         };
 
+        // Eliminar noticia
+        function deleteNews(id) {
+            if (!confirm('¿Seguro que deseas eliminar esta noticia?')) return;
+
+            const index = newsData.findIndex(news => news.id === id);
+            if (index > -1) {
+                newsData.splice(index, 1);
+                localStorage.setItem('newsData', JSON.stringify(newsData));
+                renderNews();
+            }
+        }
+
+        // Editar noticia
+        function editNews(id) {
+            const news = newsData.find(news => news.id === id);
+            if (!news) return;
+
+            document.getElementById('title').value = news.title;
+            editor.setData(news.content);
+            document.getElementById('image').value = news.featuredImage;
+            document.getElementById('isFeatured').checked = news.isFeatured;
+
+            document.getElementById('formTitle').innerText = 'Editar noticia';
+            document.getElementById('submitBtn').innerText = 'Actualizar noticia';
+
+            document.getElementById('newsForm').onsubmit = function (e) {
+                e.preventDefault();
+
+                news.title = document.getElementById('title').value.trim();
+                news.content = editor.getData().trim();
+                news.featuredImage = document.getElementById('image').value.trim();
+                news.isFeatured = document.getElementById('isFeatured').checked;
+
+                localStorage.setItem('newsData', JSON.stringify(newsData));
+                renderNews();
+
+                document.getElementById('formTitle').innerText = 'Publicar una nueva noticia';
+                document.getElementById('submitBtn').innerText = 'Publicar Noticia';
+                document.getElementById('newsForm').reset();
+                editor.setData('');
+            };
+        }
+
+        // Renderizar noticias al cargar la página
         renderNews();
     </script>
 </body>

@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dub Club Argentina</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://dubclubargentina.com.ar/assets/img/dubclubargentinalogo.jpg" type="image/x-icon">
+
     <style>
+        /* Noticias destacadas */
         .featured-news {
+            position: relative;
             height: 50vh;
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
@@ -14,8 +20,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-size: cover;
-            background-position: center;
+        }
+
+        .featured-news h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 5px black;
         }
 
         .news-card img {
@@ -29,6 +38,30 @@
             text-align: center;
         }
 
+        /* Navbar */
+        .navbar {
+            background-color: #000; /* Fondo negro */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            z-index: 1030; /* Por encima del contenido */
+        }
+
+        .navbar.fixed-top {
+            position: sticky; /* Barra fija */
+            top: 0;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            width: 40px; /* Tamaño del logo */
+            height: auto;
+            margin-right: 10px; /* Espacio entre logo y texto */
+        }
+
+        /* Header con animación */
         .welcome-header {
             height: 60vh;
             background-image: linear-gradient(45deg, #ff0000, #ffcc00, #008000);
@@ -50,25 +83,54 @@
             text-shadow: 2px 2px 5px black;
         }
 
+        /* Animación de degradé */
         @keyframes gradient-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
-        @media (max-width: 767px) {
-            .welcome-header h1 {
-                font-size: 2rem;
-            }
+        /* Sección entrevistas */
+        .interviews-section {
+            background-color: #000;
+            padding: 40px 20px;
+            color: white;
+            text-align: center;
+            position: relative;
+            margin-top: 50px;
+            border: 3px solid transparent;
+            background-image: linear-gradient(45deg, #ff0000, #ffcc00, #008000);
+            background-size: 400% 400%;
+            animation: gradient-animation 5s ease infinite;
+        }
+
+        .interviews-section h2 {
+            font-family: 'Arial', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .interviews-section iframe {
+            width: 100%;
+            height: 560px; /* Aumentado el tamaño del video */
+            border: none;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="https://dubclubargentina.com.ar/assets/img/dubclubargentinalogo.jpg" alt="Logo DubClubArgentina" style="width: 40px;">
+                <img src="https://dubclubargentina.com.ar/assets/img/dubclubargentinalogo.jpg" alt="Logo DubClubArgentina">
                 Dub Club Argentina
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,58 +148,114 @@
         </div>
     </nav>
 
-    <!-- Header -->
+    <!-- Header de bienvenida -->
     <header class="welcome-header">
         <h1>Bienvenidos al Dub Club Argentina</h1>
-        <p>Noticias y eventos de la cultura Sound System</p>
+        <br>
+        <p>Eventos y Música DUB, Reggae, Roots, Steppers y Cultura Sound System</p>
     </header>
 
-    <!-- Noticias -->
-    <div class="container my-5">
-        <h2>Noticias Recientes</h2>
-        <div id="newsContainer" class="row"></div>
+    <!-- Noticia destacada -->
+    <div class="featured-news" id="featuredNews" style="background-image: url(''); background-size: cover; background-position: center;">
+        <div>
+            <h1>Noticia Destacada</h1>
+            <button id="featuredButton" class="btn btn-light">Leer más</button>
+        </div>
     </div>
 
+    <!-- Noticias -->
+     <br>
+    <div class="container my-5">
+        <div class="row" id="newsContainer">
+            <!-- Aquí se cargarán las noticias dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Entrevistas -->
+    <section class="interviews-section">
+        <h2>Entrevistas</h2>
+        <p>Explora las entrevistas más destacadas de la escena DUB.</p>
+        <iframe src="https://www.youtube.com/embed/M2VSTeTH-aQ?si=76rMdCOr8kAQl761" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </section>
+
     <!-- Footer -->
-    <footer style="background-color: #000; color: #fff; padding: 40px 20px; text-align: center;">
-        <p>© 2024 DubClubArgentina. Todos los derechos reservados.</p>
-        <p>
-            <a href="https://www.instagram.com/dubclubargentina/" target="_blank" style="margin: 0 10px; color: white;">
-                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width: 30px;">
-            </a>
-            <a href="https://www.facebook.com/dubclubargentina" target="_blank" style="margin: 0 10px; color: white;">
-                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111425.png" alt="Facebook" style="width: 30px;">
-            </a>
-        </p>
+    <footer style="background-color: #000; color: #fff; padding: 40px 20px; position: relative; text-align: center; background-image: linear-gradient(45deg, #ff0000, #ffcc00, #008000); background-size: 400% 400%; animation: gradient-animation 5s ease infinite;">
+        <div class="container">
+            <h5 style="margin-bottom: 10px; font-size: 1.2rem; color: #fff;">Dub Club Argentina</h5>
+            <p style="margin: 0; font-size: 1rem; color: #fff;">Argentina, Buenos Aires</p>
+            <p style="margin: 5px 0; font-size: 1rem;">
+                Email: <a href="mailto:dubclubargentina@gmail.com" style="color: #fff; text-decoration: none;">dubclubargentina@gmail.com</a>
+            </p>
+            <div style="margin: 15px 0;">
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/dubclubargentina/" target="_blank" style="margin: 0 10px;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width: 30px; height: 30px;">
+                </a>
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/dubclubargentina" target="_blank" style="margin: 0 10px;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" style="width: 30px; height: 30px;">
+                </a>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/5493413209744" target="_blank" style="margin: 0 10px; text-decoration: none;">
+                    <button style="background-color: #25D366; border: none; color: #fff; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        WhatsApp
+                    </button>
+                </a>
+            </div>
+            <div style="border-top: 1px solid #ff0000; margin-top: 15px; padding-top: 10px; font-size: 0.9rem; color: #fff;">
+                © Copyright Dub Club Argentina. Todos los derechos reservados<br>
+                Diseño y Programación <a href="https://www.instagram.com/lamarea_dg/" target="_blank" style="color: #ff0000; text-decoration: none;">MAREA</a>
+            </div>
+        </div>
     </footer>
 
-    <script>
-        const storageKey = 'newsData';
-
-        function getNews() {
-            return JSON.parse(localStorage.getItem(storageKey)) || [];
+    <!-- Animación de degradé -->
+    <style>
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
+    </style>
 
-        function renderNews() {
-            const newsContainer = document.getElementById('newsContainer');
-            const news = getNews();
-            newsContainer.innerHTML = news.length
-                ? news.map(n => `
-                    <div class="col-md-4">
-                        <div class="card news-card">
-                            <img src="${n.image}" class="card-img-top" alt="${n.title}">
-                            <div class="card-body">
-                                <h5 class="card-title">${n.title}</h5>
-                                <p class="card-text">${n.content.slice(0, 100)}...</p>
-                                <a href="noticia.html?id=${n.id}" class="btn btn-primary">Leer más</a>
-                            </div>
+    <script>
+        // Cargar noticias desde localStorage
+        const newsData = JSON.parse(localStorage.getItem('newsData')) || [];
+        const newsContainer = document.getElementById('newsContainer');
+        const featuredNews = document.getElementById('featuredNews');
+        const featuredButton = document.getElementById('featuredButton');
+
+        if (newsData.length === 0) {
+            featuredNews.innerHTML = `<h1>No hay noticias publicadas aún</h1>`;
+            newsContainer.innerHTML = `<p>No hay noticias disponibles.</p>`;
+        } else {
+            // Mostrar la noticia destacada
+            const featured = newsData.find(news => news.isFeatured);
+            if (featured) {
+                featuredNews.style.backgroundImage = `url('${featured.featuredImage}')`;
+                featuredNews.querySelector('h1').textContent = featured.title;
+                featuredButton.onclick = () => (window.location.href = `noticia.html?id=${featured.id}`);
+            }
+
+            // Renderizar las noticias
+            newsContainer.innerHTML = newsData.map(news => 
+                `<div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card news-card">
+                        <img src="${news.featuredImage}" class="card-img-top" alt="${news.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${news.title}</h5>
+                            <button class="btn btn-primary" onclick="window.location.href='noticia.html?id=${news.id}'">Leer más</button>
                         </div>
                     </div>
-                `).join('')
-                : '<p>No hay noticias disponibles.</p>';
+                </div>`).join('');
         }
-
-        renderNews();
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
