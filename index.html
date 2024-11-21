@@ -20,6 +20,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background-size: cover;
+            background-position: center;
         }
 
         .featured-news h1 {
@@ -123,6 +125,21 @@
             margin-top: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
+
+        /* Responsividad */
+        @media (max-width: 767px) {
+            .welcome-header h1 {
+                font-size: 2rem;
+            }
+
+            .featured-news h1 {
+                font-size: 2rem;
+            }
+
+            .news-card img {
+                height: 150px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -156,7 +173,7 @@
     </header>
 
     <!-- Noticia destacada -->
-    <div class="featured-news" id="featuredNews" style="background-image: url(''); background-size: cover; background-position: center;">
+    <div class="featured-news" id="featuredNews" style="background-image: url('');">
         <div>
             <h1>Noticia Destacada</h1>
             <button id="featuredButton" class="btn btn-light">Leer más</button>
@@ -193,17 +210,12 @@
                 </a>
                 <!-- Facebook -->
                 <a href="https://www.facebook.com/dubclubargentina" target="_blank" style="margin: 0 10px;">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" style="width: 30px; height: 30px;">
-                </a>
-                <!-- WhatsApp -->
-                <a href="https://wa.me/5493413209744" target="_blank" style="margin: 0 10px; text-decoration: none;">
-                    <button style="background-color: #25D366; border: none; color: #fff; padding: 10px 20px; border-radius: 5px;">Contáctanos</button>
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111425.png" alt="Facebook" style="width: 30px; height: 30px;">
                 </a>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
