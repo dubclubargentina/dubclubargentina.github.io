@@ -8,37 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
     <style>
         .card-img-top {
-            display: block;
-            margin: 0 auto;
             max-height: 200px;
             object-fit: cover;
         }
-
-        .card-text {
-            text-align: justify;
-            padding: 10px;
-        }
-
-        .card-body {
-            text-align: center;
-        }
-
         .card {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
-            overflow: hidden;
         }
-
         .container h2 {
             text-align: center;
-            margin-bottom: 20px;
-        }
-
-        /* Responsividad */
-        @media (max-width: 767px) {
-            .card-img-top {
-                max-height: 150px;
-            }
         }
     </style>
 </head>
@@ -58,17 +36,13 @@
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label">Contenido</label>
-                <textarea class="form-control" id="content" rows="5"></textarea>
+                <textarea class="form-control" id="content"></textarea>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Imagen destacada (URL)</label>
                 <input type="url" class="form-control" id="image" required>
             </div>
-            <div class="mb-3">
-                <label for="isFeatured" class="form-label">Marcar como noticia destacada</label>
-                <input type="checkbox" class="form-check-input" id="isFeatured">
-            </div>
-            <button type="submit" class="btn btn-primary" id="submitBtn">Publicar Noticia</button>
+            <button type="submit" class="btn btn-primary">Publicar</button>
         </form>
     </div>
 
@@ -79,74 +53,59 @@
 
     <script>
         let editor;
-
-        // Inicializar CKEditor
         ClassicEditor.create(document.querySelector('#content'))
             .then(newEditor => editor = newEditor)
             .catch(error => console.error(error));
 
-        const API_URL = 'https://jsonplaceholder.typicode.com/posts'; // Cambiar por tu servidor real
+        const storageKey = 'newsData';
 
-        async function fetchNews() {
-            const response = await fetch(API_URL);
-            return response.json();
+        function getNews() {
+            return JSON.parse(localStorage.getItem(storageKey)) || [];
         }
 
-        async function renderNews() {
-            const newsList = document.getElementById('newsList');
-            const noticias = await fetchNews();
-            if (noticias.length === 0) {
-                newsList.innerHTML = '<p>No hay noticias publicadas.</p>';
-                return;
-            }
+        function saveNews(news) {
+            localStorage.setItem(storageKey, JSON.stringify(news));
+        }
 
-            newsList.innerHTML = noticias.map(news => `
-                <div class="col-12 col-sm-6 col-md-4 mb-4">
-                    <div class="card">
-                        <img src="${news.featuredImage || 'https://via.placeholder.com/200'}" class="card-img-top" alt="${news.title}">
-                        <div class="card-body">
-                            <h5 class="card-title">${news.title}</h5>
-                            <p class="card-text">${news.body || 'Sin contenido disponible...'}</p>
-                            <button class="btn btn-danger btn-sm" onclick="deleteNews(${news.id})">Eliminar</button>
+        function renderNews() {
+            const newsList = document.getElementById('newsList');
+            const news = getNews();
+            newsList.innerHTML = news.length
+                ? news.map(n => `
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="${n.image}" class="card-img-top" alt="${n.title}">
+                            <div class="card-body">
+                                <h5>${n.title}</h5>
+                                <p>${n.content.slice(0, 100)}...</p>
+                                <button class="btn btn-danger btn-sm" onclick="deleteNews(${n.id})">Eliminar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('')
+                : '<p>No hay noticias publicadas.</p>';
         }
 
-        async function postNews(data) {
-            await fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
+        function deleteNews(id) {
+            const news = getNews().filter(n => n.id !== id);
+            saveNews(news);
+            renderNews();
         }
 
-        document.getElementById('newsForm').onsubmit = async function (e) {
+        document.getElementById('newsForm').onsubmit = function (e) {
             e.preventDefault();
-
             const title = document.getElementById('title').value.trim();
             const content = editor.getData().trim();
             const image = document.getElementById('image').value.trim();
-            const isFeatured = document.getElementById('isFeatured').checked;
 
-            if (!title || !content || !image) {
-                alert('Por favor, completa todos los campos.');
-                return;
-            }
+            if (!title || !content || !image) return alert('Completa todos los campos.');
 
-            await postNews({ title, content, image, isFeatured });
+            const news = getNews();
+            news.push({ id: Date.now(), title, content, image });
+            saveNews(news);
             renderNews();
         };
 
-        async function deleteNews(id) {
-            if (!confirm('¿Seguro que deseas eliminar esta noticia?')) return;
-
-            await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-            renderNews();
-        }
-
-        // Renderizar noticias al cargar la página
         renderNews();
     </script>
 </body>
