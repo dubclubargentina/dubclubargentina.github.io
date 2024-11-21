@@ -95,10 +95,15 @@
 
         // Intentar obtener las noticias de localStorage
         let newsData = [];
+
+        // Recuperamos las noticias de localStorage si existen
         try {
-            newsData = JSON.parse(localStorage.getItem('newsData')) || [];
+            const storedData = localStorage.getItem('newsData');
+            if (storedData) {
+                newsData = JSON.parse(storedData);
+            }
         } catch (e) {
-            console.warn('Error accediendo a localStorage, usando respaldo temporal.');
+            console.warn('Error accediendo a localStorage, utilizando valor por defecto.');
         }
 
         const newsList = document.getElementById('newsList');
@@ -140,14 +145,14 @@
             }
 
             const newNews = {
-                id: newsData.length ? newsData[0].id + 1 : 1,
+                id: newsData.length ? Math.max(...newsData.map(news => news.id)) + 1 : 1, // Generar ID único
                 title,
                 content,
                 featuredImage: image,
                 isFeatured
             };
 
-            newsData.unshift(newNews); // Agregar noticia al inicio
+            newsData.push(newNews); // Agregar la nueva noticia al final
             localStorage.setItem('newsData', JSON.stringify(newsData));
 
             renderNews(); // Actualizar la lista
