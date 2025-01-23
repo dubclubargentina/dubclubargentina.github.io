@@ -1,9 +1,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const API_KEY = "245d4563e7334d83bcc1d6350c23d801"; // Reemplaza con tu clave de NewsAPI
- 
-  const BASE_URL = "https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything";
-
+  const BASE_URL = "https://newsapi.org/v2/everything";
+  
 
   const sections = [
     { id: "noticias", query: "Rosario" },
