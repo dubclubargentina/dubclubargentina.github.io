@@ -8,9 +8,6 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Banner Superior -->
-    <div class="banner-top" id="bannerContainer"></div>
-
     <!-- Barra de Navegación CNN -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -39,30 +36,5 @@
     </div>
 
     <script src="js/scripts.js"></script>
-document.addEventListener('DOMContentLoaded', function () {
-    const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
-    const contenedorNoticias = document.getElementById('noticias');
-
-    if (noticias.length === 0) {
-        contenedorNoticias.innerHTML = '<p>No hay noticias disponibles.</p>';
-    } else {
-        noticias.forEach(noticia => {
-            const card = `
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        ${noticia.imagenes.length > 0 ? 
-                            `<img src="${noticia.imagenes[0].url}" class="card-img-top" alt="${noticia.titulo}">` : ''}
-                        <div class="card-body">
-                            <h5 class="card-title">${noticia.titulo}</h5>
-                            <p class="card-text">${noticia.contenido.substring(0, 100)}...</p>
-                            <a href="#" class="btn btn-danger">Leer más</a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            contenedorNoticias.innerHTML += card;
-        });
-    }
-});
 </body>
 </html>
