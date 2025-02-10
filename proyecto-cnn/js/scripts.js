@@ -5,7 +5,7 @@ document.getElementById('formCarga').addEventListener('submit', function (event)
     const titulo = document.getElementById('titulo').value;
     const contenido = document.getElementById('contenido').value;
     const imagenes = document.getElementById('imagenes').files;
-    const videos = document.getElementById('videos').value.split(','); // Si hay múltiples enlaces
+    const videos = document.getElementById('videos').value.split(',').filter(url => url.trim() !== ''); // Filtra URLs vacías
 
     // Crea un objeto con los datos
     const noticia = {
