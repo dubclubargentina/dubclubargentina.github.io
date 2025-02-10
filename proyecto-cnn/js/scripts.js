@@ -1,3 +1,6 @@
+https://docs.google.com/spreadsheets/d/e/2PACX-1vR1FDkf5GUk_Q6pOaDJW93JNJKQXaVYY1f5vwP5Vq1-SeWNk6K21ecf3-k5WnA8yjXy_QrhRpDLLdlf/pub?output=csv
+
+
 // Autenticación
 const usuarios = [
     { user: 'nachoirazoqui', pass: 'surfdubbing', rol: 'editor' },
