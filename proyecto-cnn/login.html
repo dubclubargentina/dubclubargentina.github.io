@@ -29,27 +29,5 @@
         </div>
     </div>
     <script src="js/scripts.js"></script>
-document.getElementById('loginForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const usuario = document.getElementById('usuario').value;
-    const password = document.getElementById('password').value;
-
-    // Usuarios permitidos
-    const usuarios = [
-        { user: 'nachoirazoqui', pass: 'surfdubbing' },
-        { user: 'admin', pass: 'admin' }
-    ];
-
-    // Verificar credenciales
-    const usuarioValido = usuarios.find(u => u.user === usuario && u.pass === password);
-
-    if (usuarioValido) {
-        localStorage.setItem('auth', 'true');
-        window.location.href = 'carga.html'; // Redirigir al panel de carga
-    } else {
-        alert('Usuario o contraseña incorrectos');
-    }
-});
 </body>
 </html>
