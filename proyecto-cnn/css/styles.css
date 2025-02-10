@@ -1,33 +1,28 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 .navbar {
-    background-color: #343a40 !important;
+    border-bottom: 3px solid #cc0000;
 }
 
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.card {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-h1 {
-    color: #dc3545;
+.btn-danger {
+    background-color #cc0000;
+    border: none;
 }
 
-.form-label {
-    font-weight: bold;
+.banner-top {
+    height: 90px;
+    background: #000;
+    margin-bottom: 20px;
 }
 
-.btn-primary {
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-
-.btn-primary:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
 }
