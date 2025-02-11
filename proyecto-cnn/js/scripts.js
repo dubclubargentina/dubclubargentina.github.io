@@ -1,5 +1,5 @@
 // Clave API de NewsAPI (obtén una clave gratuita en https://newsapi.org/)
-const apiKey = "TU_API_KEY";
+const apiKey = "245d4563e7334d83bcc1d6350c23d801";
 
 // Función para cargar noticias desde NewsAPI
 async function cargarNoticias() {
