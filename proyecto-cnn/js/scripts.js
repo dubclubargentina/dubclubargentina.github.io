@@ -1,98 +1,67 @@
-// Función para cargar y mostrar las noticias en la página de inicio
-function cargarNoticias() {
-    const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+// Clave API de NewsAPI (obtén una clave gratuita en https://newsapi.org/)
+const apiKey = "245d4563e7334d83bcc1d6350c23d801";
+
+// Función para cargar noticias desde NewsAPI
+async function cargarNoticias() {
     const noticiasContainer = document.getElementById('noticias');
+    const cargando = document.getElementById('cargando');
 
-    // Limpiar el contenedor de noticias antes de cargar nuevas
-    noticiasContainer.innerHTML = '';
+    try {
+        const response = await fetch(`https://newsapi.org/v2/top-headlines?country=ar&apiKey=${apiKey}`);
+        const data = await response.json();
 
-    // Recorrer las noticias y mostrarlas
-    noticias.forEach((noticia, index) => {
-        const noticiaHTML = `
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    ${noticia.imagenes.length > 0 ? `<img src="${noticia.imagenes[0]}" class="card-img-top" alt="${noticia.titulo}">` : ''}
-                    <div class="card-body">
-                        <h5 class="card-title">${noticia.titulo}</h5>
-                        <p class="card-text">${noticia.contenido}</p>
-                        ${noticia.videos.length > 0 ? `<p><strong>Videos:</strong> ${noticia.videos.join(', ')}</p>` : ''}
-                        <button class="btn btn-danger btn-sm" onclick="eliminarNoticia(${index})">Eliminar</button>
+        if (data.articles.length === 0) {
+            noticiasContainer.innerHTML = '<p>No hay noticias disponibles.</p>';
+            return;
+        }
+
+        noticiasContainer.innerHTML = ''; // Limpia el contenedor
+
+        data.articles.forEach(article => {
+            const card = `
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="${article.urlToImage || 'https://via.placeholder.com/800x400'}" class="card-img-top" alt="${article.title}" onerror="this.src='https://via.placeholder.com/800x400';">
+                        <div class="card-body">
+                            <h5 class="card-title">${article.title}</h5>
+                            <p class="card-text">${article.description || 'Descripción no disponible'}...</p>
+                            <a href="noticia.html?titulo=${encodeURIComponent(article.title)}&imagen=${encodeURIComponent(article.urlToImage || 'https://via.placeholder.com/800x400')}&contenido=${encodeURIComponent(article.content || article.description || 'Contenido no disponible')}" class="btn btn-primary">Leer más</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
-        noticiasContainer.innerHTML += noticiaHTML;
-    });
-}
-
-// Función para eliminar una noticia
-function eliminarNoticia(index) {
-    let noticias = JSON.parse(localStorage.getItem('noticias')) || [];
-    noticias.splice(index, 1); // Eliminar la noticia en la posición `index`
-    localStorage.setItem('noticias', JSON.stringify(noticias));
-    cargarNoticias(); // Recargar las noticias
-}
-
-// Cargar las noticias al abrir la página de inicio
-window.onload = function () {
-    if (window.location.pathname.endsWith('index.html')) {
-        cargarNoticias();
+            `;
+            noticiasContainer.innerHTML += card;
+        });
+    } catch (error) {
+        noticiasContainer.innerHTML = '<p>Error al cargar las noticias. Inténtalo de nuevo más tarde.</p>';
+        console.error('Error:', error);
+    } finally {
+        cargando.style.display = 'none'; // Oculta el indicador de carga
     }
-};
+}
 
-// Función para manejar el login (simulación)
-document.getElementById('formLogin').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const usuario = document.getElementById('usuario').value;
-    const password = document.getElementById('password').value;
+// Función para cargar noticia completa
+function cargarNoticiaCompleta() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const titulo = urlParams.get('titulo');
+    const imagen = urlParams.get('imagen');
+    const contenido = urlParams.get('contenido');
 
-    // Simulación de autenticación
-    if (usuario === 'admin' && password === 'admin') {
-        window.location.href = 'carga.html';
+    if (titulo && imagen && contenido) {
+        document.getElementById('noticiaTitulo').textContent = titulo;
+        document.getElementById('noticiaImagen').src = imagen;
+        document.getElementById('noticiaContenido').textContent = contenido;
     } else {
-        alert('Usuario o contraseña incorrectos.');
+        document.getElementById('noticiaTitulo').textContent = 'Noticia no encontrada';
     }
-});
+}
 
-// Función para guardar una noticia en localStorage
-document.getElementById('formCarga').addEventListener('submit', function (event) {
-    event.preventDefault();
+// Cargar noticias al iniciar la página
+if (window.location.pathname.includes('index.html')) {
+    cargarNoticias();
+}
 
-    const titulo = document.getElementById('titulo').value;
-    const contenido = document.getElementById('contenido').value;
-    const imagenes = document.getElementById('imagenes').files;
-    const videos = document.getElementById('videos').value.split(',');
-
-    // Validar el número de imágenes y videos
-    if (imagenes.length > 10) {
-        alert('Máximo 10 imágenes permitidas.');
-        return;
-    }
-
-    if (videos.length > 10) {
-        alert('Máximo 10 enlaces de video permitidos.');
-        return;
-    }
-
-    // Convertir las imágenes a URLs (simulación de subida)
-    const imagenesURLs = [];
-    for (let i = 0; i < imagenes.length; i++) {
-        imagenesURLs.push(URL.createObjectURL(imagenes[i]));
-    }
-
-    // Crear el objeto de la noticia
-    const noticia = {
-        titulo,
-        contenido,
-        imagenes: imagenesURLs,
-        videos: videos.filter(url => url.trim() !== ""), // Eliminar URLs vacíos
-    };
-
-    // Guardar la noticia en localStorage
-    let noticias = JSON.parse(localStorage.getItem('noticias')) || [];
-    noticias.push(noticia);
-    localStorage.setItem('noticias', JSON.stringify(noticias));
-
-    alert('Noticia cargada exitosamente.');
-    window.location.href = 'index.html'; // Redirigir a la página de inicio
-});
+// Cargar noticia completa al iniciar la página
+if (window.location.pathname.includes('noticia.html')) {
+    cargarNoticiaCompleta();
+}
