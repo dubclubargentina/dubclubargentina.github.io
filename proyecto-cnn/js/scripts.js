@@ -1,46 +1,38 @@
-async function cargarNoticias() {
-    const noticiasContainer = document.getElementById('noticias');
-    const cargando = document.getElementById('cargando');
+document.addEventListener("DOMContentLoaded", function() {
+  // Array de noticias (simulación)
+  const noticias = [
+    { titulo: "Noticia 1", contenido: "Esta es la descripción detallada de la noticia 1." },
+    { titulo: "Noticia 2", contenido: "Esta es la descripción detallada de la noticia 2." },
+    { titulo: "Noticia 3", contenido: "Esta es la descripción detallada de la noticia 3." }
+  ];
 
-    try {
-        // Usa la ruta de tu backend
-        const response = await fetch('http://localhost:3000/noticias');
-        if (!response.ok) {
-            throw new Error('Error al cargar las noticias');
-        }
-        const data = await response.json();
+  const contenedorNoticias = document.getElementById("noticias");
 
-        if (data.articles.length === 0) {
-            noticiasContainer.innerHTML = '<p>No hay noticias disponibles.</p>';
-            return;
-        }
+  function mostrarNoticias() {
+    // No limpiamos el contenedor si no es necesario para evitar que desaparezcan
+    // Si queremos actualizar, podemos limpiar solo al inicio de carga:
+    contenedorNoticias.innerHTML = "";
+    noticias.forEach(noticia => {
+      const divNoticia = document.createElement("div");
+      divNoticia.classList.add("noticia");
+      
+      const titulo = document.createElement("h2");
+      titulo.textContent = noticia.titulo;
+      
+      const contenido = document.createElement("p");
+      contenido.textContent = noticia.contenido;
+      
+      divNoticia.appendChild(titulo);
+      divNoticia.appendChild(contenido);
+      contenedorNoticias.appendChild(divNoticia);
+    });
+  }
 
-        noticiasContainer.innerHTML = ''; // Limpia el contenedor
+  // Llamada inicial para mostrar las noticias
+  mostrarNoticias();
 
-        data.articles.forEach(article => {
-            const card = `
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="${article.urlToImage || 'https://via.placeholder.com/800x400'}" class="card-img-top" alt="${article.title}" onerror="this.src='https://via.placeholder.com/800x400';">
-                        <div class="card-body">
-                            <h5 class="card-title">${article.title}</h5>
-                            <p class="card-text">${article.description || 'Descripción no disponible'}...</p>
-                            <a href="noticia.html?titulo=${encodeURIComponent(article.title)}&imagen=${encodeURIComponent(article.urlToImage || 'https://via.placeholder.com/800x400')}&contenido=${encodeURIComponent(article.content || article.description || 'Contenido no disponible')}" class="btn btn-primary">Leer más</a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            noticiasContainer.innerHTML += card;
-        });
-    } catch (error) {
-        noticiasContainer.innerHTML = '<p>Error al cargar las noticias. Inténtalo de nuevo más tarde.</p>';
-        console.error('Error:', error);
-    } finally {
-        cargando.style.display = 'none'; // Oculta el indicador de carga
-    }
-}
-
-// Cargar noticias al iniciar la página
-if (window.location.pathname.includes('index.html')) {
-    cargarNoticias();
-}
+  // Importante: Asegúrate de no tener ningún setTimeout que borre el contenido.
+  // Por ejemplo, si tenías algo como:
+  // setTimeout(function() { contenedorNoticias.innerHTML = ""; }, 1000);
+  // Debes eliminarlo.
+});
