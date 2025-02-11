@@ -15,6 +15,11 @@ body {
 .card {
     border: none;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
 }
 
 .card-img-top {
@@ -29,4 +34,8 @@ body {
 
 .btn-primary:hover {
     background-color: #0056b3;
+}
+
+#cargando {
+    margin: 20px 0;
 }
