@@ -6,7 +6,7 @@ const PORT = 3000;
 app.use(express.json());
 
 app.get('/noticias', async (req, res) => {
-    const apiKey = "TU_CLAVE_DE_NEWSAPI_AQUI";
+    const apiKey = "245d4563e7334d83bcc1d6350c23d801";
     const url = `https://newsapi.org/v2/top-headlines?country=ar&apiKey=${apiKey}`;
 
     try {
