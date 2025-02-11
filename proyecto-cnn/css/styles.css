@@ -1,53 +1,32 @@
-/* Estilos básicos para la página */
-
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
 }
 
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
+.navbar {
+    background-color: #000;
+    border-bottom: 3px solid #cc0000;
 }
 
-header h1 {
-  margin: 0;
+.navbar-brand img {
+    height: 40px;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
+.card {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-nav ul li {
-  margin-right: 15px;
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
 }
 
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
+.btn-primary {
+    background-color: #007bff;
+    border: none;
 }
 
-main {
-  padding: 20px;
-}
-
-#noticias .noticia {
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-
-#imagenes img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin-bottom: 10px;
+.btn-primary:hover {
+    background-color: #0056b3;
 }
