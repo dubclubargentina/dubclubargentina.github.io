@@ -8,6 +8,9 @@ async function cargarNoticias() {
 
     try {
         const response = await fetch(`https://newsapi.org/v2/top-headlines?country=ar&apiKey=${apiKey}`);
+        if (!response.ok) {
+            throw new Error('Error al cargar las noticias');
+        }
         const data = await response.json();
 
         if (data.articles.length === 0) {
@@ -40,28 +43,7 @@ async function cargarNoticias() {
     }
 }
 
-// Función para cargar noticia completa
-function cargarNoticiaCompleta() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const titulo = urlParams.get('titulo');
-    const imagen = urlParams.get('imagen');
-    const contenido = urlParams.get('contenido');
-
-    if (titulo && imagen && contenido) {
-        document.getElementById('noticiaTitulo').textContent = titulo;
-        document.getElementById('noticiaImagen').src = imagen;
-        document.getElementById('noticiaContenido').textContent = contenido;
-    } else {
-        document.getElementById('noticiaTitulo').textContent = 'Noticia no encontrada';
-    }
-}
-
 // Cargar noticias al iniciar la página
 if (window.location.pathname.includes('index.html')) {
     cargarNoticias();
-}
-
-// Cargar noticia completa al iniciar la página
-if (window.location.pathname.includes('noticia.html')) {
-    cargarNoticiaCompleta();
 }
