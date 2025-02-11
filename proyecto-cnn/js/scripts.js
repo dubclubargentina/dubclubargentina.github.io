@@ -3,6 +3,7 @@ async function cargarNoticias() {
     const cargando = document.getElementById('cargando');
 
     try {
+        // Usa la ruta de tu backend
         const response = await fetch('http://localhost:3000/noticias');
         if (!response.ok) {
             throw new Error('Error al cargar las noticias');
